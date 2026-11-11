@@ -27,3 +27,9 @@
 
 # sitecore temp files
 .sitecore/
+
+# authoring build outputs
+authoring/**/bin/
+authoring/**/obj/
+authoring/**/packages/
+.vs/

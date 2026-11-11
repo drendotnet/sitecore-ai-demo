@@ -1,4 +1,5 @@
 {
+  "authoringPath": "./authoring",
   "renderingHosts": {
     "schott-ai-editihost": {
       "path": "./",

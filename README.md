@@ -49,10 +49,36 @@ to recognize the source as a compatible project. Its rendering host points to `.
 and uses Node.js 24, `npm run build`, and `npm start` for the active application.
 Do not point the deployment at `sitecore-starter/`.
 
-Commit and push this file with the application, then redeploy the corresponding
-branch in SitecoreAI. This configures the rendering-host build, not a Sitecore
-authoring application or content deployment. Content SDK rendering and editing
-still require the integration described below. Basic Auth only runs on Vercel;
+The main environment deployment also needs an authoring project. The configuration
+sets `authoringPath` to `./authoring`, containing `XmCloudAuthoring.sln` and the
+.NET Framework 4.8 web application `platform/Platform.csproj`. This structure,
+the NuGet feeds, package versions, publishing exclusions, and Sitecore CLI manifest
+follow the official [SitecoreAI starter](https://github.com/Sitecore/xmcloud-starter-js).
+No demo content, site IDs, credentials, or content serialization modules are included.
+The project does not replace the platform's web.config or deploy built-in Sitecore DLLs.
+
+Commit and push all authoring files, `nuget.config`, `sitecore.json`,
+`.config/dotnet-tools.json`, and `xmcloud.build.json` with the application. Then
+redeploy the corresponding branch in SitecoreAI. With split deployment, run the
+main environment deployment for authoring and the separate editing-host deployment
+for the frontend. The editing host must be named exactly `schott-ai-editihost` in
+the portal and in `renderingHosts`.
+
+For a local authoring build, use Visual Studio 2022 Build Tools with the ASP.NET
+web build tools and .NET Framework 4.8 targeting pack:
+
+```powershell
+MSBuild.exe authoring/XmCloudAuthoring.sln /restore /p:Configuration=Release
+```
+
+No Sitecore API key or project/environment ID is needed to compile this baseline.
+The Deploy portal supplies the deployment connection; CLI login is only needed
+for authenticated CLI operations. Do not commit generated `.sitecore` login data.
+
+Content SDK rendering and editing still require the integration described below;
+deploying this baseline alone does not make the Hello World page editable.
+Keep connection values in local environment files or deployment environment
+variables, never in source control or chat. Basic Auth only runs on Vercel;
 it does not protect the SitecoreAI rendering host.
 
 ## Sitecore Starter and Next Steps
