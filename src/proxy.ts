@@ -1,5 +1,18 @@
 import { createHash, timingSafeEqual } from 'node:crypto';
-import { NextResponse, type NextRequest } from 'next/server';
+import { NextResponse, type NextRequest, type NextFetchEvent } from 'next/server';
+import {
+  defineProxy,
+  PreviewProxy,
+  BotTrackingProxy,
+  LocaleProxy,
+  AppRouterMultisiteProxy,
+  RedirectsProxy,
+  PersonalizeProxy,
+} from '@sitecore-content-sdk/nextjs/proxy';
+import sites from '.sitecore/sites.json';
+import scConfig from 'sitecore.config';
+import { routing } from './i18n/routing';
+import client from './lib/sitecore-client';
 
 const unauthorized = () =>
   new NextResponse('Authentication required', {
@@ -13,9 +26,9 @@ const unauthorized = () =>
 const hash = (value: Uint8Array | string) =>
   createHash('sha256').update(value).digest();
 
-export function proxy(request: NextRequest) {
+function authenticate(request: NextRequest) {
   if (process.env.VERCEL !== '1') {
-    return NextResponse.next();
+    return null;
   }
 
   const username = process.env.BASIC_AUTH_USERNAME;
@@ -43,9 +56,46 @@ export function proxy(request: NextRequest) {
   const validUsername = timingSafeEqual(hash(suppliedUsername), hash(username));
   const validPassword = timingSafeEqual(hash(suppliedPassword), hash(password));
 
-  return validUsername && validPassword ? NextResponse.next() : unauthorized();
+  return validUsername && validPassword ? null : unauthorized();
+}
+
+export function proxy(request: NextRequest, event: NextFetchEvent) {
+  const authentication = authenticate(request);
+  if (authentication) return authentication;
+
+  const preview = new PreviewProxy({ client, ...scConfig.api.edge });
+  const botTracking = new BotTrackingProxy({ ...scConfig.api.edge, sites, fetchEvent: event });
+  const locale = new LocaleProxy({
+    sites,
+    locales: routing.locales.slice(),
+    defaultLanguage: scConfig.defaultLanguage,
+    skip: () => false,
+  });
+  const multisite = new AppRouterMultisiteProxy({
+    sites,
+    ...scConfig.multisite,
+    skip: () => false,
+  });
+  const redirects = new RedirectsProxy({
+    sites,
+    ...scConfig.api.edge,
+    ...scConfig.api.local,
+    ...scConfig.redirects,
+    skip: () => false,
+  });
+  const personalize = new PersonalizeProxy({
+    sites,
+    ...scConfig.api.edge,
+    ...scConfig.personalize,
+    skip: () => false,
+  });
+
+  return defineProxy(preview, botTracking, locale, multisite, redirects, personalize).exec(request);
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+  matcher: [
+    '/',
+    '/((?!api/|sitemap|robots|_next/|healthz|sitecore/api/|-/|.*[.](?:svg|png|jpe?g|gif|webp|avif|ico|woff2?|ttf|otf|eot|css|js|map|webmanifest)$).*)',
+  ],
 };

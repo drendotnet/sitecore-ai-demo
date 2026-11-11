@@ -1,12 +1,17 @@
-# SCHOTT SitecoreAI Pilot
+# SitecoreAI Pilot
 
-Minimal Next.js App Router application with a Hello World page, ready for Vercel.
-No Sitecore credentials or environment variables are required for this first deployment.
-The Sitecore Content SDK is installed but is not yet connected or used to render content.
+Next.js App Router application connected to SitecoreAI through the Content SDK.
+The configured site is `schott`, with English (`en`) as its default language.
+Pages, dictionaries, preview, and editing use the Sitecore client and generated maps.
 
 ## Local Development
 
 Use Node.js 24 LTS and npm.
+
+Use `.env.example` as the variable reference and set the connection values from
+SitecoreAI Deploy > Environment > Developer Settings in `.env.local`.
+Set `NEXT_PUBLIC_DEFAULT_SITE_NAME=schott` and `NEXT_PUBLIC_DEFAULT_LANGUAGE=en`.
+Never commit `.env.local` or share its secrets in chat.
 
 ```sh
 npm ci
@@ -22,6 +27,11 @@ npm run build
 npm start
 ```
 
+The dev and build scripts generate `.sitecore` metadata, site information,
+component maps, and import maps before running Next.js. The generated directory
+is ignored by Git. Run `npm run sitecore-tools:generate-map` before a standalone
+type check on a fresh checkout. A valid Sitecore connection is needed for generation.
+
 ## Vercel
 
 Import this repository and use these project settings:
@@ -32,7 +42,8 @@ Import this repository and use these project settings:
 - Install command: `npm ci`
 - Build command: `npm run build`
 - Output directory: Next.js default (do not override)
-- Environment variables: none needed for the application yet
+- Environment variables: configure the Sitecore values listed in `.env.example`
+- Basic Auth: set both `BASIC_AUTH_USERNAME` and `BASIC_AUTH_PASSWORD` on Vercel
 
 The existing GitLab pipeline remains unchanged. For deployment through GitLab CI,
 configure `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` as GitLab CI/CD
@@ -75,8 +86,15 @@ No Sitecore API key or project/environment ID is needed to compile this baseline
 The Deploy portal supplies the deployment connection; CLI login is only needed
 for authenticated CLI operations. Do not commit generated `.sitecore` login data.
 
-Content SDK rendering and editing still require the integration described below;
-deploying this baseline alone does not make the Hello World page editable.
+The active app exposes `/api/editing/config`, `/api/editing/render`, and
+`/api/editing/experimental`, protected by `SITECORE_EDITING_SECRET` through the SDK.
+Configure the Sitecore connection values on the editing host too: your local
+`.env.local` is not uploaded to SitecoreAI or Vercel. Associate the site `schott`
+with `schott-ai-editihost` in SitecoreAI and verify it in Page Builder after deployment.
+
+The SDK proxy resolves public URLs to `[site]/[locale]/[[...path]]` and preserves
+the preview, bot tracking, locale, multisite, redirects, and personalization order.
+Preview and page metadata both use draft-mode data rather than published content.
 Keep connection values in local environment files or deployment environment
 variables, never in source control or chat. Basic Auth only runs on Vercel;
 it does not protect the SitecoreAI rendering host.
@@ -90,13 +108,15 @@ as a reference, excluded from the active application's TypeScript build.
 This reference directory is not configured as a standalone application.
 
 The active application is under `src/app/`. Do not deploy the reference directory.
-Starter agent guidance and capability documentation refer to the full Sitecore template,
-not the current standalone Hello World implementation.
+The reference client's App Router, i18n, placeholders, and editing route handlers
+are now integrated into the active app. The original standalone root-page source
+is retained, but public `/` is rewritten to the configured Sitecore site.
 
-Once connection details are available, integrate the reference client, Sitecore routes,
-proxy and build-time generation into the active app; configure the site, Edge context,
-editing secret, language and editing host. The archived root page is not a fallback or
-an automatic Sitecore integration switch. Never commit credentials or `.env.local`.
+A site created with Start from scratch initially has empty header, main, and footer
+placeholders. An empty page is expected until renderings are added in Page Builder.
+Custom renderings belong in `src/components/`; component maps regenerate automatically.
+Design Library authentication requires the optional client ID and secret variables
+listed in `.env.example`. The reference BYOC setup has not been activated.
 
 Documentation: https://doc.sitecore.com/sai/en/developers/content-sdk/sitecore-content-sdk-for-sitecoreai.html
 

@@ -19,6 +19,13 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
+    "paths": {
+      "src/*": ["./src/*"],
+      "lib/*": ["./src/lib/*"],
+      "components/*": ["./src/components/*"],
+      ".sitecore/*": ["./.sitecore/*"],
+      "sitecore.config": ["./sitecore.config.ts"]
+    },
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
