@@ -13,7 +13,9 @@ export default defineCliConfig({
     commands: [
       generateMetadata(),
       generateSites(),
-      extractFiles(),
+      extractFiles({
+        customValidateDeployContext: () => process.env.VERCEL !== '1',
+      }),
       writeImportMap({ paths: ['src/components'] }),
     ],
   },
