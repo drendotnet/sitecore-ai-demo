@@ -1,9 +1,22 @@
+import Image from 'next/image';
+
 export default function DemoHeader() {
   return (
     <header className="site-header site-header--standalone">
       <div className="header-meta">
         <span>News &amp; Media</span>
-        <span className="header-language">EN</span>
+        <span className="header-language">
+          <Image
+            src="/flags/gb.png"
+            alt=""
+            width={24}
+            height={16}
+            className="header-language-flag"
+            loading="eager"
+            unoptimized
+          />
+          EN
+        </span>
       </div>
       <div className="header-main">
         <span className="wordmark">SCHOTT</span>

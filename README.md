@@ -73,7 +73,7 @@ Commit and push all authoring files, `nuget.config`, `sitecore.json`,
 `.config/dotnet-tools.json`, and `xmcloud.build.json` with the application. Then
 redeploy the corresponding branch in SitecoreAI. With split deployment, run the
 main environment deployment for authoring and the separate editing-host deployment
-for the frontend. The editing host must be named exactly `demo-editinghost` in
+for the frontend. The editing host must be named exactly `schott-ai-edithost` in
 the portal and in `renderingHosts`.
 
 For a local authoring build, use Visual Studio 2022 Build Tools with the ASP.NET
@@ -91,7 +91,7 @@ The active app exposes `/api/editing/config`, `/api/editing/render`, and
 `/api/editing/experimental`, protected by `SITECORE_EDITING_SECRET` through the SDK.
 Configure the Sitecore connection values on the editing host too: your local
 `.env.local` is not uploaded to SitecoreAI or Vercel. Associate your configured site
-with `demo-editinghost` in SitecoreAI and verify it in Page Builder after deployment.
+with `schott-ai-edithost` in SitecoreAI and verify it in Page Builder after deployment.
 Existing environments must use an editing host with this exact name before deploying
 the renamed configuration; update or recreate the portal host as necessary. The CMS
 site's actual system name remains an environment setting and need not be renamed.
