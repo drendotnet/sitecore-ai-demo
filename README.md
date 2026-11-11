@@ -105,40 +105,16 @@ it does not protect the SitecoreAI rendering host.
 
 ## Demo Header
 
-`src/components/demo/DemoHeader.tsx` is an editable Server Component registered
-automatically as `DemoHeader`. Place it in `headless-header`; place `DemoHero` in
-`headless-main`. The layout renders these placeholders in that order. The header
-stays in normal document flow and does not overlap the hero on mobile or desktop.
+`src/components/demo/DemoHeader.tsx` is a static HTML Server Component for the POC.
+`src/Layout.tsx` renders it directly before the Sitecore placeholders, so no header
+templates, fields, datasource, rendering item, or Page Builder setup are needed.
+Edit the brand, links, and language label directly in the component source.
 
-The generated component map does not create CMS templates, datasources, or rendering
-items. Create these in your Sitecore environment before adding the header:
-
-1. Create a `Demo Navigation Link` datasource template with a `Link` field of type
-	General Link. Create the required menu items from this template under your site's
-	shared Data folder, using real page destinations and link descriptions.
-2. Create a `Demo Header` datasource template with the following fields. Configure
-	the Multilist source to point to your navigation link items.
-
-| Field | Sitecore Field Type | Purpose |
-| --- | --- | --- |
-| `Brand` | Single-Line Text | Text wordmark, for example `DEMO` |
-| `Logo` | Image | Optional logo; takes precedence over the text wordmark |
-| `HomeLink` | General Link | Logo or brand destination, normally the Home page |
-| `UtilityLinks` | Multilist | Links in the upper row |
-| `NavigationLinks` | Multilist | Main navigation links |
-| `LanguageLink` | General Link | Language destination and displayed label, for example `EN` |
-
-3. Create and populate a header datasource from `Demo Header` in the shared Data
-	folder. Use descriptive image alt text or a descriptive home-link title for the logo.
-4. Create a JSON Rendering with Component Name `DemoHeader`, using the header
-	datasource template and its Data location. Add the rendering to the allowed
-	controls of the `headless-header` placeholder settings used by your page design.
-5. Add `DemoHeader` to the header placeholder in Page Builder or the shared header
-	partial design, select its datasource, and publish the rendering, templates,
-	datasource, linked navigation items, and affected page/design for public delivery.
-
-The component renders no hardcoded navigation or brand when its datasource is
-missing. Adding the source file alone therefore does not fill an empty CMS page.
+The header stays in normal document flow before `headless-main` and its hero.
+The existing `headless-header` placeholder remains available for optional CMS
+extensions. Do not add `DemoHeader` to that placeholder as well, or it will appear
+twice; remove any previously placed instance. Design Library rendering remains
+unchanged. `DemoHero` still uses Sitecore fields and belongs in `headless-main`.
 
 ## Sitecore Starter and Next Steps
 
@@ -154,7 +130,8 @@ are now integrated into the active app. The original standalone root-page source
 is retained, but public `/` is rewritten to the configured Sitecore site.
 
 A site created with Start from scratch initially has empty header, main, and footer
-placeholders. An empty page is expected until renderings are added in Page Builder.
+placeholders. The static demo header is visible immediately; the main content stays
+empty until renderings are added in Page Builder.
 Custom renderings belong in `src/components/`; component maps regenerate automatically.
 Design Library authentication requires the optional client ID and secret variables
 listed in `.env.example`. The reference BYOC setup has not been activated.
