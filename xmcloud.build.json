@@ -1,6 +1,6 @@
 {
   "renderingHosts": {
-    "schott-sitecore-ai-pilot": {
+    "schott-ai-editihost": {
       "path": "./",
       "nodeVersion": "24.22.1",
       "packageManager": "npm",
