@@ -14,6 +14,8 @@ import scConfig from 'sitecore.config';
 import { routing } from './i18n/routing';
 import client from './lib/sitecore-client';
 
+const basicAuthEnabled = false;
+
 const unauthorized = () =>
   new NextResponse('Authentication required', {
     status: 401,
@@ -27,7 +29,7 @@ const hash = (value: Uint8Array | string) =>
   createHash('sha256').update(value).digest();
 
 function authenticate(request: NextRequest) {
-  if (process.env.VERCEL !== '1') {
+  if (!basicAuthEnabled || process.env.VERCEL !== '1') {
     return null;
   }
 
