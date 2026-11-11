@@ -42,6 +42,19 @@ should deploy. Alternatively, use Vercel's Git integration if it supports your G
 The page uses `noindex` metadata and robots.txt disallows crawling. This is not access
 control; use Vercel Deployment Protection when the pilot must not be public.
 
+## SitecoreAI Deployment
+
+The repository root contains `xmcloud.build.json`, required by SitecoreAI Deploy
+to recognize the source as a compatible project. Its rendering host points to `./`
+and uses Node.js 24, `npm run build`, and `npm start` for the active application.
+Do not point the deployment at `sitecore-starter/`.
+
+Commit and push this file with the application, then redeploy the corresponding
+branch in SitecoreAI. This configures the rendering-host build, not a Sitecore
+authoring application or content deployment. Content SDK rendering and editing
+still require the integration described below. Basic Auth only runs on Vercel;
+it does not protect the SitecoreAI rendering host.
+
 ## Sitecore Starter and Next Steps
 
 Generated with the official `create-content-sdk-app` CLI version 2.4.2, using the

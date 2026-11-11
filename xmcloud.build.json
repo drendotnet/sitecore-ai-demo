@@ -1,0 +1,13 @@
+{
+  "renderingHosts": {
+    "schott-sitecore-ai-pilot": {
+      "path": "./",
+      "nodeVersion": "24.22.1",
+      "packageManager": "npm",
+      "enabled": true,
+      "type": "sxa",
+      "buildCommand": "build",
+      "runCommand": "start"
+    }
+  }
+}
