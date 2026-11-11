@@ -1,7 +1,7 @@
 # SitecoreAI Pilot
 
 Next.js App Router application connected to SitecoreAI through the Content SDK.
-The configured site is `schott`, with English (`en`) as its default language.
+The example site is `demo`, with English (`en`) as its default language.
 Pages, dictionaries, preview, and editing use the Sitecore client and generated maps.
 
 ## Local Development
@@ -10,7 +10,8 @@ Use Node.js 24 LTS and npm.
 
 Use `.env.example` as the variable reference and set the connection values from
 SitecoreAI Deploy > Environment > Developer Settings in `.env.local`.
-Set `NEXT_PUBLIC_DEFAULT_SITE_NAME=schott` and `NEXT_PUBLIC_DEFAULT_LANGUAGE=en`.
+Set `NEXT_PUBLIC_DEFAULT_SITE_NAME` to your site's actual system name (for example,
+`demo`) and `NEXT_PUBLIC_DEFAULT_LANGUAGE=en`.
 Never commit `.env.local` or share its secrets in chat.
 
 ```sh
@@ -72,7 +73,7 @@ Commit and push all authoring files, `nuget.config`, `sitecore.json`,
 `.config/dotnet-tools.json`, and `xmcloud.build.json` with the application. Then
 redeploy the corresponding branch in SitecoreAI. With split deployment, run the
 main environment deployment for authoring and the separate editing-host deployment
-for the frontend. The editing host must be named exactly `schott-ai-editihost` in
+for the frontend. The editing host must be named exactly `demo-editinghost` in
 the portal and in `renderingHosts`.
 
 For a local authoring build, use Visual Studio 2022 Build Tools with the ASP.NET
@@ -89,8 +90,11 @@ for authenticated CLI operations. Do not commit generated `.sitecore` login data
 The active app exposes `/api/editing/config`, `/api/editing/render`, and
 `/api/editing/experimental`, protected by `SITECORE_EDITING_SECRET` through the SDK.
 Configure the Sitecore connection values on the editing host too: your local
-`.env.local` is not uploaded to SitecoreAI or Vercel. Associate the site `schott`
-with `schott-ai-editihost` in SitecoreAI and verify it in Page Builder after deployment.
+`.env.local` is not uploaded to SitecoreAI or Vercel. Associate your configured site
+with `demo-editinghost` in SitecoreAI and verify it in Page Builder after deployment.
+Existing environments must use an editing host with this exact name before deploying
+the renamed configuration; update or recreate the portal host as necessary. The CMS
+site's actual system name remains an environment setting and need not be renamed.
 
 The SDK proxy resolves public URLs to `[site]/[locale]/[[...path]]` and preserves
 the preview, bot tracking, locale, multisite, redirects, and personalization order.
@@ -98,6 +102,43 @@ Preview and page metadata both use draft-mode data rather than published content
 Keep connection values in local environment files or deployment environment
 variables, never in source control or chat. Basic Auth only runs on Vercel;
 it does not protect the SitecoreAI rendering host.
+
+## Demo Header
+
+`src/components/demo/DemoHeader.tsx` is an editable Server Component registered
+automatically as `DemoHeader`. Place it in `headless-header`; place `DemoHero` in
+`headless-main`. The layout renders these placeholders in that order. The header
+stays in normal document flow and does not overlap the hero on mobile or desktop.
+
+The generated component map does not create CMS templates, datasources, or rendering
+items. Create these in your Sitecore environment before adding the header:
+
+1. Create a `Demo Navigation Link` datasource template with a `Link` field of type
+	General Link. Create the required menu items from this template under your site's
+	shared Data folder, using real page destinations and link descriptions.
+2. Create a `Demo Header` datasource template with the following fields. Configure
+	the Multilist source to point to your navigation link items.
+
+| Field | Sitecore Field Type | Purpose |
+| --- | --- | --- |
+| `Brand` | Single-Line Text | Text wordmark, for example `DEMO` |
+| `Logo` | Image | Optional logo; takes precedence over the text wordmark |
+| `HomeLink` | General Link | Logo or brand destination, normally the Home page |
+| `UtilityLinks` | Multilist | Links in the upper row |
+| `NavigationLinks` | Multilist | Main navigation links |
+| `LanguageLink` | General Link | Language destination and displayed label, for example `EN` |
+
+3. Create and populate a header datasource from `Demo Header` in the shared Data
+	folder. Use descriptive image alt text or a descriptive home-link title for the logo.
+4. Create a JSON Rendering with Component Name `DemoHeader`, using the header
+	datasource template and its Data location. Add the rendering to the allowed
+	controls of the `headless-header` placeholder settings used by your page design.
+5. Add `DemoHeader` to the header placeholder in Page Builder or the shared header
+	partial design, select its datasource, and publish the rendering, templates,
+	datasource, linked navigation items, and affected page/design for public delivery.
+
+The component renders no hardcoded navigation or brand when its datasource is
+missing. Adding the source file alone therefore does not fill an empty CMS page.
 
 ## Sitecore Starter and Next Steps
 
