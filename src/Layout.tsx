@@ -1,6 +1,7 @@
 import { AppPlaceholder, DesignLibraryApp, type Page } from '@sitecore-content-sdk/nextjs';
 import SitecoreHead from 'src/SitecoreHead';
 import DemoHeader from 'components/demo/DemoHeader';
+import DemoFooter from 'src/DemoFooter';
 import componentMap from '.sitecore/component-map';
 
 export default function Layout({ page }: { page: Page }) {
@@ -23,14 +24,11 @@ export default function Layout({ page }: { page: Page }) {
           <>
             <div id="header">
               <DemoHeader />
-              {route && <AppPlaceholder page={page} componentMap={componentMap} name="headless-header" rendering={route} />}
             </div>
             <main id="content">
               {route && <AppPlaceholder page={page} componentMap={componentMap} name="headless-main" rendering={route} />}
             </main>
-            <footer id="footer">
-              {route && <AppPlaceholder page={page} componentMap={componentMap} name="headless-footer" rendering={route} />}
-            </footer>
+            <DemoFooter />
           </>
         )}
       </div>
