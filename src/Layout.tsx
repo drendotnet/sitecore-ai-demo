@@ -1,7 +1,7 @@
 import { AppPlaceholder, DesignLibraryApp, type Page } from '@sitecore-content-sdk/nextjs';
 import SitecoreHead from 'src/SitecoreHead';
 import DemoHeader from 'components/demo/DemoHeader';
-import DemoFooter from 'src/DemoFooter';
+import DemoFooter from 'components/demo/DemoFooter';
 import componentMap from '.sitecore/component-map';
 
 export default function Layout({ page }: { page: Page }) {

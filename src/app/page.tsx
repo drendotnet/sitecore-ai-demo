@@ -1,4 +1,4 @@
-import DemoFooter from 'src/DemoFooter';
+import DemoFooter from 'components/demo/DemoFooter';
 
 const features = [
   {
