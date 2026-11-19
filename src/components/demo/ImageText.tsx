@@ -13,11 +13,43 @@ type ImageTextProps = ComponentWithContextProps & { fields?: ImageTextFields };
 export default function ImageText({ fields, params, page }: ImageTextProps) {
   if (!fields) return null;
 
-  const imagePosition = params.ImagePosition?.toLowerCase() === 'right' ? 'right' : 'left';
+  const variantName = params.FieldNames || 'Default';
+
+  // Map variant name to CSS classes
+  const getVariantClasses = (name: string): string => {
+    const name_lower = name.toLowerCase();
+    
+    // Start with default (image on left)
+    let classes = ['feature-row--image-left'];
+    
+    // Add additional classes based on variant name
+    if (name_lower.includes('right')) {
+      classes = ['feature-row--image-right'];
+    }
+    if (name_lower.includes('background')) {
+      classes.push('feature-row--with-background');
+    }
+    if (name_lower.includes('grey')) {
+      classes.push('feature-row--grey-background');
+    }
+    if (name_lower.includes('portrait')) {
+      classes.push('feature-row--portrait');
+    }
+    if (name_lower.includes('small')) {
+      classes.push('feature-row--small');
+    }
+    if (name_lower.includes('medium')) {
+      classes.push('feature-row--medium');
+    }
+    
+    return classes.join(' ');
+  };
+
+  const variantClasses = getVariantClasses(variantName);
 
   return (
     <article
-      className={`feature-row feature-row--image-${imagePosition}`}
+      className={`feature-row ${variantClasses}`}
       id={params.RenderingIdentifier || undefined}
     >
       <div className="feature-copy">
