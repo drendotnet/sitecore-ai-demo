@@ -1,7 +1,7 @@
 import { Image, Link, RichText, Text, type Field, type ImageField, type LinkField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentWithContextProps } from 'lib/component-props';
 
-type ImageTextFields = {
+export type ImageTextFields = {
   Image?: ImageField;
   Title?: Field<string>;
   Description?: Field<string>;
