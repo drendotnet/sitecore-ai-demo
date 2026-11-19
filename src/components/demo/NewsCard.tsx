@@ -11,27 +11,12 @@ export type NewsCardFields = {
 
 type NewsCardProps = ComponentWithContextProps & { fields?: NewsCardFields };
 
-export default function NewsCard({ fields, params, page }: NewsCardProps) {
+interface NewsCardViewProps extends NewsCardProps {
+  variantClasses: string;
+}
+
+function NewsCardView({ fields, params, page, variantClasses }: NewsCardViewProps) {
   if (!fields) return null;
-
-  const variantName = params.FieldNames || 'Default';
-
-  // Map variant name to CSS classes
-  const getVariantClasses = (name: string): string => {
-    const name_lower = name.toLowerCase();
-    
-    // Start with default (full width)
-    let classes = ['news-card--full-width'];
-    
-    // Add classes based on variant name
-    if (name_lower.includes('half') || name_lower.includes('grid')) {
-      classes = ['news-card--half-width'];
-    }
-    
-    return classes.join(' ');
-  };
-
-  const variantClasses = getVariantClasses(variantName);
 
   return (
     <div
@@ -75,6 +60,16 @@ export default function NewsCard({ fields, params, page }: NewsCardProps) {
   );
 }
 
-// Named exports for variants (must match Sitecore variant item names)
-export { NewsCard as NewsCardFullWidth };
-export { NewsCard as NewsCardHalfWidth };
+// Default variant - full width
+export default function NewsCard(props: NewsCardProps) {
+  return <NewsCardView {...props} variantClasses="news-card--full-width" />;
+}
+
+// Variant exports - each specifies its own CSS classes
+export function NewsCardFullWidth(props: NewsCardProps) {
+  return <NewsCardView {...props} variantClasses="news-card--full-width" />;
+}
+
+export function NewsCardHalfWidth(props: NewsCardProps) {
+  return <NewsCardView {...props} variantClasses="news-card--half-width" />;
+}

@@ -10,42 +10,12 @@ export type ImageTextFields = {
 
 type ImageTextProps = ComponentWithContextProps & { fields?: ImageTextFields };
 
-export default function ImageText({ fields, params, page }: ImageTextProps) {
+interface ImageTextViewProps extends ImageTextProps {
+  variantClasses: string;
+}
+
+function ImageTextView({ fields, params, page, variantClasses }: ImageTextViewProps) {
   if (!fields) return null;
-
-  const variantName = params.FieldNames || 'Default';
-
-  // Map variant name to CSS classes
-  const getVariantClasses = (name: string): string => {
-    const name_lower = name.toLowerCase();
-    
-    // Start with default (image on left)
-    let classes = ['feature-row--image-left'];
-    
-    // Add additional classes based on variant name
-    if (name_lower.includes('right')) {
-      classes = ['feature-row--image-right'];
-    }
-    if (name_lower.includes('background')) {
-      classes.push('feature-row--with-background');
-    }
-    if (name_lower.includes('grey')) {
-      classes.push('feature-row--grey-background');
-    }
-    if (name_lower.includes('portrait')) {
-      classes.push('feature-row--portrait');
-    }
-    if (name_lower.includes('small')) {
-      classes.push('feature-row--small');
-    }
-    if (name_lower.includes('medium')) {
-      classes.push('feature-row--medium');
-    }
-    
-    return classes.join(' ');
-  };
-
-  const variantClasses = getVariantClasses(variantName);
 
   return (
     <article
@@ -68,8 +38,34 @@ export default function ImageText({ fields, params, page }: ImageTextProps) {
   );
 }
 
-// Named exports for variants (must match Sitecore variant item names)
-export { ImageText as ImageTextImageRight };
-export { ImageText as ImageTextImageLeft };
-export { ImageText as PortraitImageRight };
-export { ImageText as PortraitImageLeft };
+// Default variant - image on left
+export default function ImageText(props: ImageTextProps) {
+  return <ImageTextView {...props} variantClasses="feature-row--image-left" />;
+}
+
+// Variant exports - each specifies its own CSS classes
+export function ImageTextImageLeft(props: ImageTextProps) {
+  return <ImageTextView {...props} variantClasses="feature-row--image-left" />;
+}
+
+export function ImageTextImageRight(props: ImageTextProps) {
+  return <ImageTextView {...props} variantClasses="feature-row--image-right" />;
+}
+
+export function PortraitImageRight(props: ImageTextProps) {
+  return (
+    <ImageTextView
+      {...props}
+      variantClasses="feature-row--image-right feature-row--portrait"
+    />
+  );
+}
+
+export function PortraitImageLeft(props: ImageTextProps) {
+  return (
+    <ImageTextView
+      {...props}
+      variantClasses="feature-row--image-left feature-row--portrait"
+    />
+  );
+}
