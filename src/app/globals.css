@@ -417,3 +417,123 @@ body {
   .hero-copy h1 { font-size: 36px; }
   .footer-columns { grid-template-columns: 1fr; }
 }
+
+/* NewsCard Component */
+.news-card {
+  width: min(var(--content-width), calc(100% - 64px));
+  margin: 0 auto 60px;
+}
+
+.news-card--full-width {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.news-card--half-width {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.news-card__item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.news-card__image-wrapper {
+  width: 100%;
+  overflow: hidden;
+  background: var(--pale);
+}
+
+.news-card--full-width .news-card__image-wrapper {
+  min-height: 400px;
+  aspect-ratio: 16 / 9;
+}
+
+.news-card--half-width .news-card__image-wrapper {
+  min-height: 280px;
+  aspect-ratio: 1;
+}
+
+.news-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.news-card__content {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-card__meta {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.news-card__date,
+.news-card__location {
+  display: inline-block;
+}
+
+.news-card__date::after {
+  content: ' |';
+  margin-left: 12px;
+  color: var(--pale);
+}
+
+.news-card__title {
+  margin: 0 0 12px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--navy);
+}
+
+.news-card--full-width .news-card__title {
+  font-size: 24px;
+}
+
+.news-card__description {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink);
+  flex: 1;
+}
+
+@media (max-width: 900px) {
+  .news-card {
+    width: calc(100% - 40px);
+  }
+
+  .news-card--half-width {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .news-card--full-width .news-card__image-wrapper {
+    min-height: 300px;
+  }
+
+  .news-card__title {
+    font-size: 16px;
+  }
+
+  .news-card--full-width .news-card__title {
+    font-size: 20px;
+  }
+}
+
