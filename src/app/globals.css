@@ -56,8 +56,8 @@ body {
 .header-language-flag { display: block; flex-shrink: 0; width: 24px; height: 16px; object-fit: cover; }
 
 .site-header.site-header--standalone {
-  position: relative;
-  background: var(--navy);
+  position: absolute;
+  background: transparent;
 }
 
 .header-main {
