@@ -74,3 +74,7 @@ export default function NewsCard({ fields, params, page }: NewsCardProps) {
     </div>
   );
 }
+
+// Named exports for variants (must match Sitecore variant item names)
+export { NewsCard as NewsCardFullWidth };
+export { NewsCard as NewsCardHalfWidth };

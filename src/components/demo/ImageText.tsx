@@ -67,3 +67,9 @@ export default function ImageText({ fields, params, page }: ImageTextProps) {
     </article>
   );
 }
+
+// Named exports for variants (must match Sitecore variant item names)
+export { ImageText as ImageTextImageRight };
+export { ImageText as ImageTextImageLeft };
+export { ImageText as PortraitImageRight };
+export { ImageText as PortraitImageLeft };
