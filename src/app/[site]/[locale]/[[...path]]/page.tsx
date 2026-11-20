@@ -54,5 +54,8 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const page = await loadPage(await params);
-  return getPageMetadata(page?.layout.sitecore.route);
+  return {
+    ...getPageMetadata(page?.layout.sitecore.route),
+    title: 'SCHOTT | Sitecore AI POC',
+  };
 }
