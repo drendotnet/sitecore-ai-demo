@@ -431,8 +431,92 @@ body {
 .single-quote__text { grid-column: 1 / -1; }
 .single-quote__text, .single-quote__text p { margin: 0; }
 
+.full-width-stage {
+  position: relative;
+  isolation: isolate;
+  color: var(--ink);
+}
+
+.content-stage__image-wrapper {
+  position: relative;
+  height: min(760px, 64vw);
+  min-height: 520px;
+  overflow: hidden;
+  background: var(--pale);
+}
+
+.content-stage__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content-stage > .container {
+  width: min(var(--content-width), calc(100% - 64px));
+  margin: 0 auto;
+}
+
+.content-stage__wrapper {
+  position: relative;
+  z-index: 1;
+  margin-top: -150px;
+}
+
+.content-stage__box {
+  width: min(620px, 68%);
+  padding: 32px 40px 40px;
+  background: #fff;
+}
+
+.breadcrumbs { margin-bottom: 24px; }
+
+.breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.breadcrumbs__element { display: inline-flex; align-items: center; gap: 8px; }
+.breadcrumbs__element + .breadcrumbs__element::before { color: var(--muted); content: '>'; }
+.breadcrumbs__element a { color: inherit; text-decoration: none; }
+.breadcrumbs__element a:hover { color: var(--blue); text-decoration: underline; }
+.breadcrumbs__element--active { color: var(--blue); font-weight: 600; }
+
+.content-stage__heading {
+  margin: 0 0 20px;
+  color: var(--ink);
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.content-stage__content {
+  margin: 0;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
 @media (max-width: 767px) {
   .single-quote-component { padding: 48px 20px; }
+
+  .content-stage__image-wrapper { height: 560px; min-height: 0; }
+  .content-stage > .container { width: calc(100% - 40px); }
+  .content-stage__wrapper { margin-top: -72px; }
+  .content-stage__box { width: 100%; padding: 25px 24px 30px; }
+  .breadcrumbs { margin-bottom: 18px; }
+  .breadcrumbs__list { gap: 6px; font-size: 12px; }
+  .breadcrumbs__element { gap: 6px; }
+  .content-stage__heading { margin-bottom: 16px; font-size: 34px; }
+  .content-stage__content { font-size: 15px; }
 
   .single-quote-component--with-image {
     --quote-overlap: 48px;
