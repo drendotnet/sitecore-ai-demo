@@ -6,11 +6,21 @@ import componentMap from '.sitecore/component-map';
 
 export default function Layout({ page }: { page: Page }) {
   const { route } = page.layout.sitecore;
+  const backgroundStageField = route?.fields?.['Enable Background Stage'];
+  const isBackgroundStageEnabled =
+    backgroundStageField !== undefined &&
+    !Array.isArray(backgroundStageField) &&
+    'value' in backgroundStageField &&
+    backgroundStageField.value === true;
 
   return (
     <>
       <SitecoreHead page={page} />
-      <div className={page.mode.isEditing ? 'editing-mode' : 'prod-mode'}>
+      <div
+        className={`${page.mode.isEditing ? 'editing-mode' : 'prod-mode'}${
+          isBackgroundStageEnabled ? ' has-background-stage' : ''
+        }`}
+      >
         {page.mode.isDesignLibrary ? (
           route && (
             <DesignLibraryApp

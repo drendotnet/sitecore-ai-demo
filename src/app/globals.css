@@ -32,7 +32,7 @@ body {
 }
 
 .site-header {
-  position: absolute;
+  position: relative;
   z-index: 2;
   top: 0;
   left: 0;
@@ -40,7 +40,7 @@ body {
   min-height: 121px;
   padding: 16px max(calc((100vw - var(--content-width)) / 2), 5%);
   color: #fff;
-  background: transparent;
+  background: var(--navy);
 }
 
 .header-meta {
@@ -56,6 +56,11 @@ body {
 .header-language-flag { display: block; flex-shrink: 0; width: 24px; height: 16px; object-fit: cover; }
 
 .site-header.site-header--standalone {
+  position: relative;
+  background: var(--navy);
+}
+
+.has-background-stage .site-header.site-header--standalone {
   position: absolute;
   background: transparent;
 }
