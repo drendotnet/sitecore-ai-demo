@@ -9,7 +9,7 @@ main#content {
 
 main#content > article,
 main#content > section,
-main#content > div:not(.news-card) {
+main#content > div:not(.news-card):not(.icon-properties-card) {
   text-align: left;
 }
 
