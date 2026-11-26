@@ -1,0 +1,123 @@
+/* ============================================================================
+   IMAGE TEXT COMPONENT (Feature List)
+   ============================================================================ */
+
+.feature-list { 
+  padding: 80px 0 40px; 
+}
+
+.feature-row {
+  width: min(var(--content-width), calc(100% - 64px));
+  min-height: 990px;
+  margin: 0 auto 80px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  gap: 24px;
+}
+
+.feature-copy { 
+  grid-row: 1; 
+}
+
+.feature-row--image-left .feature-copy { 
+  grid-column: 2; 
+}
+
+.feature-row--image-right .feature-copy { 
+  grid-column: 1; 
+}
+
+.feature-copy h2 {
+  margin: 0 0 26px;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.2;
+  font-family: var(--font-family-base);
+}
+
+.feature-copy p {
+  margin: 0 0 44px;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-base);
+  line-height: 1.5;
+}
+
+.feature-media {
+  grid-row: 1;
+  width: 100%;
+  aspect-ratio: 0.625;
+  margin: 0;
+  overflow: hidden;
+}
+
+.feature-row--image-left .feature-media { 
+  grid-column: 1; 
+}
+
+.feature-row--image-right .feature-media { 
+  grid-column: 2; 
+}
+
+.feature-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 900px) {
+  .feature-row { 
+    min-height: 720px; 
+  }
+
+  .feature-copy h2 { 
+    font-size: 34px; 
+  }
+
+  .feature-copy p { 
+    font-size: 15px; 
+  }
+}
+
+@media (max-width: 640px) {
+  .feature-list { 
+    padding: 26px 0 20px; 
+  }
+
+  .feature-row {
+    width: calc(100% - 40px);
+    min-height: 0;
+    margin-bottom: 56px;
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .feature-row--image-left .feature-copy,
+  .feature-row--image-right .feature-copy,
+  .feature-row--image-left .feature-media,
+  .feature-row--image-right .feature-media { 
+    grid-column: 1; 
+  }
+
+  .feature-copy { 
+    grid-row: 2; 
+  }
+
+  .feature-media { 
+    grid-row: 1; 
+    aspect-ratio: 0.9; 
+  }
+
+  .feature-copy h2 { 
+    margin-bottom: 18px; 
+    font-size: 30px; 
+  }
+
+  .feature-copy p { 
+    margin-bottom: 26px; 
+    font-size: 15px; 
+  }
+}
