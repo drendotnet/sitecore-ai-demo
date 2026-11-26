@@ -1,0 +1,25 @@
+/* ============================================================================
+   BASE STYLES & ELEMENT RESETS
+   ============================================================================ */
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--color-text-primary);
+  background: var(--color-bg-white);
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  letter-spacing: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
