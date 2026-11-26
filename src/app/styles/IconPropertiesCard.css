@@ -1,0 +1,97 @@
+/* ============================================================================
+   ICON PROPERTIES CARD COMPONENT
+   ============================================================================ */
+
+.icon-properties-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 24px;
+  background-color: var(--color-bg-secondary);
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  min-height: 350px;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.icon-properties-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.icon-properties-card__icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+}
+
+.icon-properties-card__icon-wrapper svg {
+  width: 100%;
+  height: 100%;
+  color: inherit;
+}
+
+.icon-properties-card__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  font-family: var(--font-family-base);
+}
+
+.icon-properties-card__description {
+  margin: 0;
+  font-size: 15px;
+  color: var(--color-text-primary);
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  font-family: var(--font-family-base);
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .icon-properties-card {
+    padding: 24px 20px;
+    min-height: auto;
+  }
+
+  .icon-properties-card__icon-wrapper {
+    width: 100px;
+    height: 100px;
+  }
+
+  .icon-properties-card__title {
+    font-size: var(--font-size-md);
+  }
+
+  .icon-properties-card__description {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .icon-properties-card {
+    padding: 20px 16px;
+    gap: 12px;
+  }
+
+  .icon-properties-card__icon-wrapper {
+    width: 90px;
+    height: 90px;
+  }
+
+  .icon-properties-card__title {
+    font-size: var(--font-size-base);
+  }
+
+  .icon-properties-card__description {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}
