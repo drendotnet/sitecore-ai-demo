@@ -1,8 +1,8 @@
-import { RichText, type Field } from '@sitecore-content-sdk/nextjs';
+import { Text, RichText, Image, type Field, type ImageField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentWithContextProps } from 'lib/component-props';
 
 export type IconPropertiesCardFields = {
-  Icon?: string;
+  Icon?: ImageField;
   Title?: Field<string>;
   Description?: Field<string>;
 };
@@ -17,10 +17,16 @@ export default function IconPropertiesCard({ fields, params }: IconPropertiesCar
       className="icon-properties-card"
       id={params.RenderingIdentifier || undefined}
     >
-      <div className="icon-properties-card__icon-wrapper">
-        {fields.Icon && <div dangerouslySetInnerHTML={{ __html: fields.Icon }} />}
-      </div>
-      {fields.Title && <h3 className="icon-properties-card__title">{fields.Title.value}</h3>}
+      {fields.Icon && (
+        <div className="icon-properties-card__icon-wrapper">
+          <Image field={fields.Icon} />
+        </div>
+      )}
+      {fields.Title && (
+        <h3 className="icon-properties-card__title">
+          <Text field={fields.Title} />
+        </h3>
+      )}
       {fields.Description && (
         <div className="icon-properties-card__description">
           <RichText field={fields.Description} />
