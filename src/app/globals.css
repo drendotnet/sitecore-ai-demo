@@ -11,6 +11,9 @@
 /* Base element resets and defaults */
 @import "./styles/base.css";
 
+/* Reusable components */
+@import "./styles/Breadcrumbs.css";
+
 /* ============================================================================
    COMPONENT STYLES
    ============================================================================ */
