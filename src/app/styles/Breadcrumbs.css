@@ -1,0 +1,61 @@
+/* ============================================================================
+   BREADCRUMBS COMPONENT (Reusable)
+   ============================================================================ */
+
+.breadcrumbs {
+  margin-bottom: 30px;
+}
+
+.breadcrumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.breadcrumbs__element {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumbs__element:not(:last-child)::after {
+  content: '|';
+  color: var(--muted);
+  margin: 0 10px 0 13px;
+}
+
+.breadcrumbs__element a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.breadcrumbs__element a:hover {
+  color: var(--color-link-hover);
+}
+
+.breadcrumbs__element--active {
+  color: var(--ink);
+  font-weight: var(--font-weight-semibold);
+}
+
+@media (max-width: 767px) {
+  .breadcrumbs {
+    margin-bottom: 20px;
+  }
+
+  .breadcrumbs__list {
+    gap: 6px;
+    font-size: 12px;
+  }
+
+  .breadcrumbs__element {
+    gap: 6px;
+  }
+}

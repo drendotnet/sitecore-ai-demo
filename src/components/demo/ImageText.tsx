@@ -26,7 +26,7 @@ function ImageTextView({ fields, params, page, variantClasses }: ImageTextViewPr
         {fields.Title && <Text field={fields.Title} tag="h2" />}
         {fields.Description && <RichText field={fields.Description} />}
         {fields.CTALink && (fields.CTALink.value.href || page.mode.isEditing) && (
-          <Link field={fields.CTALink} className="primary-button" />
+          <Link field={fields.CTALink} className="primary-button btn btn--primary" />
         )}
       </div>
       {fields.Image && (
