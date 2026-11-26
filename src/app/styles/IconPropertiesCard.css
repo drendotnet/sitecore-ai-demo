@@ -1,24 +1,27 @@
 /* ============================================================================
    ICON PROPERTIES CARD COMPONENT
+   Cards are rendered as siblings in main#content and flow into a single row
+   (same approach as the half-width news cards).
    ============================================================================ */
 
 .icon-properties-card {
-  display: flex;
+  --icon-card-gap: 24px;
+  --icon-card-visible: 4;
+  display: inline-flex;
   flex-direction: column;
   align-items: center;
+  vertical-align: top;
+  width: calc(
+    (min(var(--content-width), calc(100% - 64px)) - (var(--icon-card-visible) - 1) * var(--icon-card-gap)) /
+      var(--icon-card-visible)
+  );
+  margin: 32px calc(var(--icon-card-gap) / 2);
   padding: 32px 24px;
   background-color: var(--color-bg-secondary);
-  border-radius: 8px;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  min-height: 350px;
+  min-height: 420px;
   gap: 16px;
   box-sizing: border-box;
-}
-
-.icon-properties-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .icon-properties-card__icon-wrapper {
@@ -38,8 +41,8 @@
 
 .icon-properties-card__title {
   margin: 0;
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-normal);
   color: var(--color-text-primary);
   line-height: 1.4;
   font-family: var(--font-family-base);
@@ -57,6 +60,7 @@
 /* Responsive design */
 @media (max-width: 1024px) {
   .icon-properties-card {
+    --icon-card-visible: 2;
     padding: 24px 20px;
     min-height: auto;
   }
@@ -77,6 +81,8 @@
 
 @media (max-width: 640px) {
   .icon-properties-card {
+    --icon-card-visible: 1;
+    --icon-card-gap: 16px;
     padding: 20px 16px;
     gap: 12px;
   }
