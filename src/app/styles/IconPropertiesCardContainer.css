@@ -1,0 +1,33 @@
+/* ============================================================================
+   ICON PROPERTIES CARD CONTAINER
+   ============================================================================ */
+
+.icon-properties-card-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  padding: 32px 0;
+  width: min(var(--content-width), calc(100% - 64px));
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* Tablet: 2 columns */
+@media (max-width: 1024px) {
+  .icon-properties-card-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding: 24px 0;
+    width: min(var(--content-width), calc(100% - 48px));
+  }
+}
+
+/* Mobile: 1 column */
+@media (max-width: 640px) {
+  .icon-properties-card-container {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 16px 0;
+    width: calc(100% - 40px);
+  }
+}
