@@ -1,0 +1,138 @@
+/* ============================================================================
+   QUOTE COMPONENT
+   ============================================================================ */
+
+.single-quote-component {
+  --quote-background: transparent;
+  --quote-overlap: 0px;
+  position: relative;
+  isolation: isolate;
+  padding: 76px 24px 80px;
+  color: var(--navy);
+}
+
+.single-quote-component::before {
+  position: absolute;
+  z-index: -1;
+  inset: var(--quote-overlap) 0 0;
+  background: var(--quote-background);
+  content: '';
+}
+
+.single-quote-component.u-bg--darkblue {
+  --quote-background: var(--navy);
+  color: #fff;
+}
+
+.single-quote-component.u-bg--grey { 
+  --quote-background: var(--pale); 
+}
+
+.single-quote-component--with-image {
+  --quote-overlap: 112px;
+  padding-top: 0;
+}
+
+.single-quote-component > .container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+}
+
+.single-quote {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  row-gap: 32px;
+  font-size: 24px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.single-quote__wrapper { 
+  display: contents; 
+}
+
+.single-quote__author-wrap {
+  display: flex;
+  grid-column: 1 / -1;
+  align-items: center;
+  align-self: end;
+  gap: 28px;
+  min-height: 36px;
+}
+
+.single-quote__icon {
+  flex: none;
+  width: 44px;
+  height: 36px;
+  fill: currentColor;
+}
+
+.single-quote__author-wrap::after {
+  flex: 0 0 40px;
+  height: 2px;
+  background: currentColor;
+  content: '';
+}
+
+.single-quote__author { 
+  order: 1; 
+}
+
+.single-quote-component--with-image .single-quote { 
+  row-gap: 38px; 
+}
+
+.single-quote-component--with-image .single-quote__author-wrap {
+  grid-area: 1 / 1;
+  padding: 0 24px 18px 0;
+}
+
+.single-quote__image {
+  grid-area: 1 / 2;
+  min-width: 0;
+  aspect-ratio: 16 / 9;
+}
+
+.single-quote__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.single-quote__text { 
+  grid-column: 1 / -1; 
+}
+
+.single-quote__text, 
+.single-quote__text p { 
+  margin: 0; 
+}
+
+@media (max-width: 767px) {
+  .single-quote-component { 
+    padding: 48px 20px; 
+  }
+
+  .single-quote-component--with-image {
+    --quote-overlap: 48px;
+    padding-top: 0;
+  }
+
+  .single-quote,
+  .single-quote-component--with-image .single-quote {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 24px;
+    font-size: 20px;
+  }
+
+  .single-quote__image { 
+    grid-area: 1 / 1; 
+  }
+
+  .single-quote-component--with-image .single-quote__author-wrap {
+    grid-area: 2 / 1;
+    padding: 0;
+  }
+}

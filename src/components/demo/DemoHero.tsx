@@ -20,7 +20,7 @@ export default function DemoHero({ fields, params, page }: DemoHeroProps) {
         {fields.Heading && <Text field={fields.Heading} tag="h1" />}
         {fields.Description && <RichText field={fields.Description} />}
         {fields.Link && (fields.Link.value.href || page.mode.isEditing) && (
-          <Link field={fields.Link} className="primary-button" />
+          <Link field={fields.Link} className="primary-button btn btn--primary" />
         )}
       </div>
     </section>
