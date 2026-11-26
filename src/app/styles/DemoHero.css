@@ -4,12 +4,11 @@
 
 .hero-stage {
   position: relative;
-  min-height: 820px;
-  height: 100svh;
-  max-height: 960px;
+  height: calc(100vh - 68px);
+  margin-bottom: 80px;
   overflow: hidden;
-  color: var(--color-text-light);
-  background: var(--color-bg-primary);
+  color: #f3f3f3;
+  background: var(--navy);
 }
 
 .hero-image {
@@ -49,15 +48,14 @@
 
 .primary-button {
   min-height: 56px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   padding: 0 42px;
-  color: var(--color-text-white);
-  background: var(--color-link);
+}
+
+.primary-button {
+  min-height: 56px;
+  padding: 0 42px;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-medium);
-  font-family: var(--font-family-base);
 }
 
 @media (max-width: 900px) {
@@ -108,7 +106,6 @@
   .primary-button { 
     min-height: 52px; 
     padding: 0 24px; 
-    font-size: 14px; 
   }
 }
 

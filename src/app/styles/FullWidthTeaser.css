@@ -91,22 +91,11 @@
 }
 
 .fullwidth-teaser__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   min-height: clamp(48px, 3.65vw, 69px);
   max-width: 100%;
   padding: 12px clamp(24px, 2.75vw, 52px);
-  background: var(--color-link);
-  color: var(--color-text-white);
   font-size: clamp(16px, 1.1vw, 20px);
   font-weight: var(--font-weight-medium);
-  font-family: var(--font-family-base);
-  text-decoration: none;
-}
-
-.fullwidth-teaser__button:hover { 
-  background: var(--color-bg-primary); 
 }
 
 .fullwidth-teaser__button:focus-visible {

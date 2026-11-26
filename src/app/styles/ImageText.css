@@ -45,6 +45,11 @@
   line-height: 1.5;
 }
 
+.primary-button {
+  min-height: 56px;
+  padding: 0 42px;
+}
+
 .feature-media {
   grid-row: 1;
   width: 100%;

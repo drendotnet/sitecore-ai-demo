@@ -18,9 +18,18 @@
   --color-text-light: var(--text-light);
   --color-text-white: var(--white);
   --color-link: var(--blue);
+  --color-link-hover: var(--navy);
   --color-bg-primary: var(--navy);
   --color-bg-secondary: var(--pale);
   --color-bg-white: var(--white);
+
+  /* Button Colors */
+  --color-btn-primary-bg: var(--blue);
+  --color-btn-primary-text: var(--white);
+  --color-btn-secondary-bg: transparent;
+  --color-btn-secondary-text: var(--blue);
+  --color-btn-secondary-border: var(--blue);
+  --color-btn-active: #d72378;
 
   /* Typography - Font Family */
   --font-family-base: Inter, Arial, sans-serif;

@@ -56,7 +56,7 @@ function FullWidthTeaserView({
           )}
           {CTALink && (CTALink.value?.href || isEditing) && (
             <div className="fullwidth-teaser__actions">
-              <Link field={CTALink} className="fullwidth-teaser__button" />
+              <Link field={CTALink} className="fullwidth-teaser__button btn btn--primary" />
             </div>
           )}
         </div>
