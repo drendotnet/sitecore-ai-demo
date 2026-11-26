@@ -2,6 +2,13 @@
    DEMO HEADER COMPONENT
    ============================================================================ */
 
+/* Sticky wrapper: negative top = header padding + header-meta height, so only header-meta scrolls away */
+#header {
+  position: sticky;
+  top: -44px;
+  z-index: 100;
+}
+
 .site-header {
   position: relative;
   z-index: 2;
@@ -20,14 +27,16 @@
   align-items: center;
   gap: 30px;
   height: 28px;
+  color: var(--color-text-header);
   font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
 }
 
 .header-language { 
   display: inline-flex; 
   align-items: center; 
   gap: 8px; 
-  font-weight: var(--font-weight-bold); 
+  font-weight: var(--font-weight-medium); 
 }
 
 .header-language-flag { 
@@ -46,6 +55,10 @@
 .has-background-stage .site-header.site-header--standalone {
   position: absolute;
   background: transparent;
+}
+
+.has-background-stage .site-header.site-header--standalone.header-is-scrolling {
+  background: var(--navy);
 }
 
 .header-main {
@@ -74,9 +87,9 @@
 }
 
 .main-nav span {
-  color: var(--color-text-white);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-bold);
+  color: var(--color-text-header);
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -101,6 +114,10 @@
 }
 
 @media (max-width: 640px) {
+  #header {
+    top: -36px;
+  }
+
   .site-header { 
     min-height: 150px; 
     padding: 14px 20px; 

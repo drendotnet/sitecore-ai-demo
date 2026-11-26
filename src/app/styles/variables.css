@@ -11,12 +11,14 @@
   --pale: #f3f4f6;
   --white: #fff;
   --text-light: #f3f3f3;
+  --text-header: #f4f5f7;
 
   /* Colors - Semantic */
   --color-text-primary: var(--ink);
   --color-text-secondary: var(--muted);
   --color-text-light: var(--text-light);
   --color-text-white: var(--white);
+  --color-text-header: var(--text-header);
   --color-link: var(--blue);
   --color-link-hover: var(--navy);
   --color-bg-primary: var(--navy);
