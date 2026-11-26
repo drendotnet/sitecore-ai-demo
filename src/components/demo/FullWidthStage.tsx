@@ -1,6 +1,6 @@
 'use client';
 
-import { Image, Text, type Field, type ImageField } from '@sitecore-content-sdk/nextjs';
+import { Image, Text, RichText, type Field, type ImageField } from '@sitecore-content-sdk/nextjs';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { ComponentWithContextProps } from 'lib/component-props';
@@ -85,7 +85,7 @@ export default function FullWidthStage({ fields, page, params }: FullWidthStageP
                 </nav>
                 {fields.Heading && <Text field={fields.Heading} tag="h1" className="content-stage__heading" />}
                 {fields.Description && (
-                  <Text field={fields.Description} tag="p" className="content-stage__content" />
+                  <RichText field={fields.Description} className="content-stage__content" />
                 )}
               </div>
             </div>

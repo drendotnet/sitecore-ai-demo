@@ -1,4 +1,4 @@
-import { Image, Link, Text, type Field, type ImageField, type LinkField } from '@sitecore-content-sdk/nextjs';
+import { Image, Link, Text, RichText, type Field, type ImageField, type LinkField } from '@sitecore-content-sdk/nextjs';
 import type { ComponentWithContextProps } from 'lib/component-props';
 
 export type FullWidthTeaserFields = {
@@ -52,7 +52,7 @@ function FullWidthTeaserView({
             <Text field={Headline} tag="h2" className="fullwidth-teaser__headline" />
           )}
           {Description && (Description.value || isEditing) && (
-            <Text field={Description} tag="p" className="fullwidth-teaser__description" />
+            <RichText field={Description} className="fullwidth-teaser__description" />
           )}
           {CTALink && (CTALink.value?.href || isEditing) && (
             <div className="fullwidth-teaser__actions">
